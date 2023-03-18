@@ -1,18 +1,18 @@
-use std::thread;
-use std::time::Instant;
+use std::thread::{self, JoinHandle};
+use std::time::{Duration, Instant};
 
 fn main() {
-    let max_threads = max_threads();
-    let mut threads = vec![];
+    let max_threads: usize = max_threads();
+    let mut threads: Vec<JoinHandle<()>> = vec![];
 
-    let start_time = Instant::now();
+    let start_time: Instant = Instant::now();
 
     for i in 1..=max_threads {
-        let thread_start_time = Instant::now();
-        let thread = thread::spawn(move || {
+        let thread_start_time: Instant = Instant::now();
+        let thread: JoinHandle<()> = thread::spawn(move || {
             let result: i64 = thread_result(100_000_000);
 
-            let thread_elapsed = thread_start_time.elapsed();
+            let thread_elapsed: Duration = thread_start_time.elapsed();
             println!(
                 "Thread {}: Result = {} ({} ms)",
                 i,
@@ -28,7 +28,7 @@ fn main() {
         thread.join().unwrap();
     }
 
-    let total_elapsed = start_time.elapsed();
+    let total_elapsed: Duration = start_time.elapsed();
     println!("Total elapsed time: {} ms", total_elapsed.as_millis());
 }
 
@@ -48,17 +48,17 @@ fn thread_result(max: usize) -> i64 {
 
 #[test]
 fn test_max_threads() {
-    let expected = num_cpus::get();
-    let actual = max_threads();
+    let expected: usize = num_cpus::get();
+    let actual: usize = max_threads();
     assert_eq!(expected, actual);
 }
 
 #[test]
 fn test_thread_result() {
-    let expected = 5000050000;
-    let start_time = Instant::now();
-    let actual = thread_result(100_000);
-    let elapsed = start_time.elapsed().as_millis();
+    let expected: i64 = 5000050000;
+    let start_time: Instant = Instant::now();
+    let actual: i64 = thread_result(100_000);
+    let elapsed: u128 = start_time.elapsed().as_millis();
     assert_eq!(expected, actual);
     println!("Thread result test passed in {} ms", elapsed);
 }
