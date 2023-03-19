@@ -1,7 +1,18 @@
 {
   "name": "Rust",
-  "build": {
-    "dockerfile": "../Dockerfile"
-  },
-  "postCreateCommand": "git config --global --add safe.directory /workspaces/rust"
+  "image": "mcr.microsoft.com/devcontainers/rust:0-1-bullseye",
+  "postCreateCommand": "/bin/sh /workspaces/rust/.devcontainer/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "tamasfe.even-better-toml",
+        "mutantdino.resourcemonitor",
+        "rust-lang.rust-analyzer",
+        "serayuzgur.crates",
+        "vadimcn.vscode-lldb",
+        "GitHub.copilot",
+        "GitHub.copilot-labs"
+      ]
+    }
+  }
 }
