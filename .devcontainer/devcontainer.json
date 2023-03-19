@@ -1,7 +1,7 @@
 {
   "name": "Rust",
   "image": "mcr.microsoft.com/devcontainers/rust:0-1-bullseye",
-  "postCreateCommand": "/bin/sh /workspaces/rust/.devcontainer/post-create.sh",
+  "postCreateCommand": "/bin/sh /workspaces/rust_performance_test/.devcontainer/post-create.sh",
   "customizations": {
     "vscode": {
       "extensions": [
