@@ -2,5 +2,6 @@
   "name": "Rust",
   "build": {
     "dockerfile": "../Dockerfile"
-  }
+  },
+  "postCreateCommand": "git config --global --add safe.directory /workspaces/rust"
 }
